@@ -30,6 +30,7 @@ public class InputManager : MonoBehaviour {
 	bool touchDown = false;
 	bool touchUp = false;
 	bool touchStay = false;
+	bool touchStayAny = false;
 
 	public bool Touch
 	{
@@ -51,6 +52,11 @@ public class InputManager : MonoBehaviour {
 		get {return stayTime > stayTimeToDrag;}
 	}
 
+	public bool TouchStayAny
+	{
+		get {return stayTimeAny > stayTimeToDrag;}
+	}
+
 	public bool MultiTouch
 	{
 		get
@@ -62,6 +68,7 @@ public class InputManager : MonoBehaviour {
 
 	public float stayTimeToDrag = 0.1f;
 	float stayTime = 0f;
+	float stayTimeAny = 0f;
 	
 	GameObject hittedGo;
 
@@ -79,6 +86,7 @@ public class InputManager : MonoBehaviour {
 		bool newTouch = Input.GetMouseButton(0) || Input.touchCount > 0;
 
 		touchStay = newTouch && touch ? true && !MultiTouch : false;
+		touchStayAny = newTouch && touch;
 	
 		touch = newTouch;
 
@@ -100,6 +108,12 @@ public class InputManager : MonoBehaviour {
 		else 
 		{
 			stayTime = 0f;
+		}
+
+		if(touchStayAny) stayTimeAny += Time.deltaTime;
+		else 
+		{
+			stayTimeAny = 0f;
 		}
 	}
 

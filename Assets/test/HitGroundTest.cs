@@ -9,7 +9,7 @@ public class HitGroundTest : MonoBehaviour {
 	void TouchClick(RaycastHit hit)
 	{
 		Vector3 newHitPos = hit.point;
-		if (!InputManager.Instance.TouchStay) 
+		if (!InputManager.Instance.TouchStayAny) 
 		{
 			Instantiate(
 				toSpawn, 

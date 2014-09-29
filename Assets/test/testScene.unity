@@ -286,7 +286,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &155729882
 Transform:
   m_ObjectHideFlags: 0
@@ -767,11 +767,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: e2cb25ec548e5ff46a8bb00df46a129b, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100016, guid: e2cb25ec548e5ff46a8bb00df46a129b, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300008, guid: e2cb25ec548e5ff46a8bb00df46a129b, type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e2cb25ec548e5ff46a8bb00df46a129b, type: 2}
@@ -2977,7 +2981,7 @@ Renderer:
     type: 2}
   m_PrefabInternal: {fileID: 258010520}
   m_GameObject: {fileID: 1709935788}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
