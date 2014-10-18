@@ -9,6 +9,7 @@ public class GameCameraScale : MonoBehaviour {
 	[Range (0f, 1f)]
 	public float currPinch = 0.5f;
 	public float pinchFactor = 1f;
+	public bool lockZoom = false;
 
 	public float Zoom
 	{
@@ -30,6 +31,7 @@ public class GameCameraScale : MonoBehaviour {
 
 	void Update()
 	{
+		if(lockZoom) return;
 		currPinch = Mathf.Clamp(currPinch + pinchFactor * InputManager.Instance.GetPinch(), 0f, 1f);
 		Zoom = zoomByPinch.Evaluate(currPinch);
 	}

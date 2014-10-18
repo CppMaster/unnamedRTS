@@ -10,6 +10,11 @@ public class InputManager : MonoBehaviour {
 	}
 
 	bool inputMouse = false;
+	public bool InputMouse
+	{
+		get {return inputMouse;}
+	}
+
 	public Camera[] cameras;
 	public LayerMask[] layerInput;
 
@@ -22,6 +27,9 @@ public class InputManager : MonoBehaviour {
 		if (Application.platform == RuntimePlatform.WindowsEditor 
 			|| Application.platform == RuntimePlatform.WindowsPlayer) 
 			inputMouse = true;
+#if FORCE_TOUCH
+		inputMouse = false;
+#endif
 
 		if(inputMouse) lastMousePosition = Input.mousePosition;
 	}

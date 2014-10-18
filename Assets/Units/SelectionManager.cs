@@ -43,33 +43,64 @@ public class SelectionManager : MonoBehaviour {
 
 	void Update()
 	{
-		if(input.TouchDown)
+		if(!input.InputMouse)
 		{
-			startTouchPos = input.TouchPosition;
-		}
-		if(input.Touch)
-		{
-			currTouchPos = input.TouchPosition;
-		}
-
-		if(input.TouchStay && !input.MultiTouch && !selectByBox && !MapDragButton.mapDragging)
-		{
-			selectByBox = true;
-			selectionQuad.renderer.enabled = true;
-		}
-		if(selectByBox)
-		{
-			SetSelectionBox();
-			if(input.TouchUp)
+			if(input.MultiTouch)
 			{
-				SelectByBox();
+				selectByBox = true;
+				selectionQuad.renderer.enabled = true;
+				startTouchPos = Input.touches[0].position;
+				currTouchPos = Input.touches[1].position;
+			}
+			if(selectByBox)
+			{
+				SetSelectionBox();
+				if(input.TouchUp)
+				{
+					SelectByBox();
+				}
+			}
+			if(!input.MultiTouch)
+			{
+				if(selectByBox)
+				{
+					selectByBox = false;
+					selectionQuad.renderer.enabled = false;
+					SelectByBox();
+				}
 			}
 		}
-		if((!input.Touch || input.MultiTouch) && selectByBox) 
-		{
-			selectByBox = false;
-			selectionQuad.renderer.enabled = false;
-			startTouchPos = currTouchPos;
+		else
+			{
+
+			if(input.TouchDown)
+			{
+				startTouchPos = input.TouchPosition;
+			}
+			if(input.Touch)
+			{
+				currTouchPos = input.TouchPosition;
+			}
+
+			if(input.TouchStay && !input.MultiTouch && !selectByBox && !MapDragButton.mapDragging)
+			{
+				selectByBox = true;
+				selectionQuad.renderer.enabled = true;
+			}
+			if(selectByBox)
+			{
+				SetSelectionBox();
+				if(input.TouchUp)
+				{
+					SelectByBox();
+				}
+			}
+			if((!input.Touch || input.MultiTouch) && selectByBox) 
+			{
+				selectByBox = false;
+				selectionQuad.renderer.enabled = false;
+				startTouchPos = currTouchPos;
+			}
 		}
 	}
 

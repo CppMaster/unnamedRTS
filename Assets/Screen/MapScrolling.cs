@@ -7,10 +7,12 @@ public class MapScrolling : MonoBehaviour {
 	public float scrollFactor = 1f;
 	Vector3 minCameraPos;
 	Vector3 maxCameraPos;
+	InputManager input;
 
 	void Start()
 	{
 		if(_camera == null) _camera = Camera.main;
+		input = InputManager.Instance;
 		Update();
 		minCameraPos = CameraPositionByGround(Vector2.one * -Ground.areaSize * 0.5f);
 		maxCameraPos = CameraPositionByGround(Vector2.one * Ground.areaSize * 0.5f);
@@ -18,7 +20,18 @@ public class MapScrolling : MonoBehaviour {
 
 	void Update()
 	{
-		Vector2 scroll = InputManager.Instance.GetScroll();
+		Vector2 scroll = Vector2.zero;
+		if(!input.InputMouse)
+		{
+			if(input.TouchStay)
+			{
+				scroll = Input.touches[0].deltaPosition;
+			}
+		}
+		else
+		{
+			scroll = InputManager.Instance.GetScroll();
+		}
 		if(scroll.sqrMagnitude > 0.000001f)
 		{
 			_camera.transform.Translate(new Vector3(scroll.x,0f,scroll.y) * -scrollFactor, Space.World);
